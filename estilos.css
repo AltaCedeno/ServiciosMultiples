@@ -1,0 +1,83 @@
+/* Reseteo básico para evitar márgenes indeseados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+}
+
+/* 1. Centra todo el bloque en el medio de la pantalla */
+.contenedor {
+    max-width: 1000px; /* Ancho máximo de tu página */
+    margin: 0 auto;    /* 0 arriba/abajo, automático a los lados (esto lo centra) */
+    padding: 20px;
+    background-color: white;
+}
+
+.logo-centrado {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Ajusta el tamaño según sea necesario */
+}
+h2 {
+    text-align: center;
+}
+
+
+.boton-verde {
+    background-color: #d4edda; /* Fondo verde clarito */
+    color: #155724;            /* Letra verde oscuro */
+    border: 1px solid #c3e6cb; /* Borde sutil */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.boton-verde:hover {
+    background-color: #c3e6cb; /* Se oscurece un poco al pasar el mouse */
+}
+
+
+/* 2. Centra el contenido dentro del encabezado */
+header {
+    display: flex;
+    flex-direction: column; /* Pone el título arriba y el menú abajo */
+    align-items: center;    /* Centra horizontalmente los elementos */
+    text-align: center;     /* Centra el texto */
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+header nav {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px; /* Espacio entre los enlaces */
+}
+
+header nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center; /* Centra todo el texto y enlaces */
+    padding: 20px;      /* Le da un poco de espacio interno arriba, abajo y a los lados */
+    width: 100%;        /* Asegura que ocupe todo el ancho de la pantalla */
+}
+
+
+
+
+/* 3. Centra el contenido principal */
+main {
+    padding: 40px 20px;
+    text-align: center; /* Si quieres el texto centrado */
+}
