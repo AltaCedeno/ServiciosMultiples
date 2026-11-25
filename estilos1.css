@@ -1,0 +1,245 @@
+/* ================= RESET Y BASE ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bs-card-bg: #ffffff;
+  --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
+  --bs-card-border-color: rgba(0, 0, 0, 0.125);
+  --bs-card-border-radius: 0.5rem;
+  --bs-card-inner-border-radius: calc(0.5rem - 1px);
+  --bs-card-spacer-y: 1rem;
+  --bs-card-spacer-x: 1.25rem;
+  --bs-card-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --bs-text-main: #212529;
+  --bs-text-muted: #6c757d;
+  --bs-body-bg: #f8f9fa;
+  --bs-primary: #0d6efd;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-text-main);
+  line-height: 1.5;
+  padding: 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= ENCABEZADO PRINCIPAL ================= */
+.main-header {
+  max-width: 1140px; /* Ancho de contenedor tipo Bootstrap */
+  width: 100%;
+  margin: 0 auto 2rem auto;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-card-border-color);
+  border-radius: var(--bs-card-border-radius);
+  box-shadow: var(--bs-card-shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main-header img {
+  border-radius: 0.375rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.main-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bs-text-main);
+}
+
+.main-header p {
+  color: var(--bs-text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* ================= GRID DE CARDS (3 COLUMNAS TIPO BOOTSTRAP) ================= */
+main {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem; /* Equivalente a g-4 en Bootstrap */
+  align-items: stretch;
+  flex: 1;
+}
+
+/* ================= CADA SECTION COMO .card DE BOOTSTRAP ================= */
+main > section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-card-border-color);
+  border-radius: var(--bs-card-border-radius);
+  box-shadow: var(--bs-card-shadow);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+main > section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
+}
+
+/* Cabecera de la card (.card-header) */
+main > section > header {
+  padding: 0.75rem var(--bs-card-spacer-x);
+  background-color: var(--bs-card-cap-bg);
+  border-bottom: 1px solid var(--bs-card-border-color);
+}
+
+main > section > header h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--bs-text-main);
+  margin: 0;
+}
+
+main > section > header small {
+  display: block;
+  color: var(--bs-text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.15rem;
+}
+
+/* Cuerpo de la card (.card-body) */
+main > section .jobs-listings {
+  flex: 1 1 auto;
+  padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+}
+
+.jobs-listings article {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Imagen dentro de la card */
+.jobs-listings article img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  border: 1px solid var(--bs-card-border-color);
+  flex-shrink: 0;
+}
+
+.jobs-listings article > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.jobs-listings article h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--bs-text-main);
+  margin-bottom: 0.2rem;
+}
+
+.jobs-listings article small {
+  display: block;
+  color: var(--bs-text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.jobs-listings article p {
+  font-size: 0.925rem;
+  color: var(--bs-text-main);
+  margin-top: 0.4rem;
+}
+
+.jobs-listings article ul {
+  padding-left: 1.15rem;
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--bs-text-main);
+}
+
+.jobs-listings article li {
+  margin-bottom: 0.25rem;
+}
+
+.jobs-listings article a {
+  color: var(--bs-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.jobs-listings article a:hover {
+  text-decoration: underline;
+}
+
+/* Pie de cada card (.card-footer) */
+main > section > footer {
+  padding: 0.75rem var(--bs-card-spacer-x);
+  background-color: var(--bs-card-cap-bg);
+  border-top: 1px solid var(--bs-card-border-color);
+  color: var(--bs-text-muted);
+  font-size: 0.85rem;
+}
+
+/* ================= FOOTER GENERAL DEL INDEX ================= */
+.main-footer {
+  max-width: 1140px;
+  width: 100%;
+  margin: 2rem auto 0 auto;
+  padding: 1rem 1.25rem;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-card-border-color);
+  border-radius: var(--bs-card-border-radius);
+  text-align: center;
+}
+
+.main-footer small {
+  color: var(--bs-text-muted);
+  font-size: 0.875rem;
+}
+
+/* ================= RESPONSIVE (MÓVIL Y TABLET) ================= */
+@media (max-width: 992px) {
+  main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 1rem;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  .main-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .jobs-listings article {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .jobs-listings article ul {
+    text-align: left;
+  }
+}
