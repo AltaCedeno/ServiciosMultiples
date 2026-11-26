@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Cotizador de Servicios</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+  label, select, input { display: block; margin: 10px 0; }
+  button { margin-top: 20px; padding: 10px 20px; }
+  .resultado { margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>Cotizador de Servicios</h2>
+
+<form id="cotizador">
+  <label for="servicio">Selecciona un servicio:</label>
+  <select id="servicio" name="servicio" required>
+    <option value="" disabled selected>-- Escoger servicio --</option>
+    <option value="1000">Instalación y mantenimiento de Redes Hidráulicas - RD$1000</option>
+    <option value="1500">Instalación y mantenimiento de Sistemas Eléctricos - RD$1500</option>
+    <option value="2000">Instalación y mantenimiento de acondicionadores de aire - RD$2000</option>
+    <option value="1000">Pintura en todos los niveles - RD$1000</option>
+    <option value="1500">mantenimiento y  limpieza general de oficinas - RD$1500</option>
+    <option value="2000">Pulido de cristalizados de pisos y escaleras - RD$2000</opti
+  </select>
+
+  <label for="cantidad">Cantidad:</label>
+  <input type="number" id="cantidad" name="cantidad" min="1" value="1" required />
+
+  <label for="descuento">Descuento (%) (opcional):</label>
+  <input type="number" id="descuento" name="descuento" min="0" max="100" value="0" />
+
+  <button type="button" onclick="calcular()">Calcular Total</button>
+</form>
+
+<div class="resultado" id="resultado"></div>
+
+<button id="enviarWhatsapp" style="display:none;" onclick="enviarWhatsapp()">Enviar por WhatsApp</button>
+
+<script>
+  function calcular() {
+    const servicioSelect = document.getElementById('servicio');
+    const cantidad = parseInt(document.getElementById('cantidad').value);
+    const descuento = parseFloat(document.getElementById('descuento').value) || 0;
+
+    if (!servicioSelect.value) {
+      alert('Por favor, selecciona un servicio.');
+      return;
+    }
+    if (cantidad < 1) {
+      alert('Cantidad debe ser al menos 1.');
+      return;
+    }
+    if (descuento < 0 || descuento > 100) {
+      alert('Descuento debe estar entre 0 y 100.');
+      return;
+    }
+
+    const precioUnitario = parseFloat(servicioSelect.value);
+    let subtotal = precioUnitario * cantidad;
+
+    // Aplicar descuento
+    let montoDescuento = subtotal * (descuento / 100);
+    let subtotalConDescuento = subtotal - montoDescuento;
+
+    // Calcular ITBIS (18%)
+    const itbis = subtotalConDescuento * 0.18;
+
+    // Total final
+    const total = subtotalConDescuento + itbis;
+
+    // Mostrar resultados
+    const resultadoDiv = document.getElementById('resultado');
+    resultadoDiv.innerHTML = `
+      Subtotal: RD$ ${subtotal.toFixed(2)}<br>
+      Descuento: RD$ ${montoDescuento.toFixed(2)}<br>
+      Subtotal con Descuento: RD$ ${subtotalConDescuento.toFixed(2)}<br>
+      ITBIS (18%): RD$ ${itbis.toFixed(2)}<br>
+      <strong>Total: RD$ ${total.toFixed(2)}</strong>
+    `;
+
+    document.getElementById('enviarWhatsapp').style.display = 'inline-block';
+
+    // Guardar datos para enviar
+    window.cotizacionTexto = `
+      Cotización de Servicios:
+      Servicio: ${servicioSelect.options[servicioSelect.selectedIndex].text}
+      Cantidad: ${cantidad}
+      Subtotal: RD$ ${subtotal.toFixed(2)}
+      Descuento: RD$ ${montoDescuento.toFixed(2)}
+      Subtotal con descuento: RD$ ${subtotalConDescuento.toFixed(2)}
+      ITBIS (18%): RD$ ${itbis.toFixed(2)}
+      Total: RD$ ${total.toFixed(2)}
+    `;
+  }
+
+  function enviarWhatsapp() {
+    const mensaje = encodeURIComponent(window.cotizacionTexto);
+    const telefono = ''; // Opcional: puedes poner un número para enviar directo
+    const urlWhatsapp = `https://wa.me/${telefono}?text=${mensaje}`;
+    window.open(urlWhatsapp, '_blank');
+  }
+</script>
+
+</body>
+</html>
